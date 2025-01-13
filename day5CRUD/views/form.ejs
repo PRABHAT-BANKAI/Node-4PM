@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="">
+      <form action="/addData" method="post">
+        <tr>
+          <td>name</td>
+          <td><input name="userName" type="text" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button>Submit</button></td>
+        </tr>
+      </form>
+    </table>
+
+    <table border="">
+      <caption>
+        user Record
+      </caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% record.forEach((element,index)=>{ %>
+        <tr>
+          <td><%= element %></td>
+          <td>
+            <a href="/edit/<%= index %>"><button>Edit</button></a>
+            <a href="/delete/<%= index %>"><button>Delete</button></a>
+          </td>
+        </tr>
+
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
