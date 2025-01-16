@@ -1,5 +1,6 @@
 const condition = (req, res, next) => {
-  const isAuth = false
+  console.log(req.body);
+  const isAuth = true;
   if (isAuth) {
     next();
     return;
