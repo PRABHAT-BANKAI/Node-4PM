@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="">
+      <form action="/addData" method="post">
+        <tr>
+          <td>Name:</td>
+          <td><input type="text" name="userName" /></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="email" name="email" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><Button>Submit</Button></td>
+        </tr>
+      </form>
+    </table>
+
+    <br />
+    <br />
+    <br />
+    <table border="">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% userData.map((user)=>{ %>
+        <tr>
+          <td><%= user.userName %></td>
+          <td><%= user.email %></td>
+          <td>
+            <a href="/deleteData/<%= user.id %>"><button>Delete</button></a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
