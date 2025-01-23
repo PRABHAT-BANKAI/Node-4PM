@@ -39,7 +39,28 @@ app.get("/deleteData/:id", async (req, res) => {
     res.redirect("/");
   } catch (err) {
     console.log(err);
+    res.redirect("back");
+  }
+});
+
+app.get("/editData/:id", async (req, res) => {
+  try {
+    let userData = await userModel.findById(req.params.id);
+    res.render("editForm", { userData });
+  } catch (err) {
+    console.log(err);
+    res.redirect("back");
+  }
+});
+
+app.post("/updateData/:id", async (req, res) => {
+  try {
+    await userModel.findByIdAndUpdate(req.params.id, req.body);
+    console.log("user updated successfully");
     res.redirect("/");
+  } catch (err) {
+    console.log(err);
+    res.redirect("back");
   }
 });
 
