@@ -3,9 +3,11 @@ const connection = require("./config/db");
 const userModel = require("./models/userModel");
 const app = express();
 const port = 8082;
+const path = require("path");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.get("/", async (req, res) => {
   try {
     let userData = await userModel.find({});
@@ -17,9 +19,15 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/addData", async (req, res) => {
+app.post("/addData", userModel.multerImage, async (req, res) => {
   // console.log(req.body);
+  // console.log(req.file);
+  // console.log(req.body);
+
   try {
+    if (req.file) {
+      req.body.image = userModel.imageUpload + "/" + req.file.filename;
+    }
     await userModel.create(req.body);
     console.log("user created successfully");
     res.redirect("/");
