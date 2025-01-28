@@ -7,7 +7,7 @@
   </head>
   <body>
     <table border="">
-      <form action="/updateData/<%= userData.id %>" method="post">
+      <form action="/updateData/<%= userData.id %>" method="post" enctype="multipart/form-data">
         <tr>
           <td>Name:</td>
           <td>
@@ -23,6 +23,11 @@
           <td>
             <input type="email" name="email" value="<%= userData.email %>" />
           </td>
+        </tr>
+        <tr>
+          <td>File upload:</td>
+          <td><input type="file" name="image" /> <img src="<%= userData.image %>" height="100px" alt=""></td>
+
         </tr>
         <tr>
           <td></td>
