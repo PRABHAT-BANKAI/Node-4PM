@@ -1,18 +1,20 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const dashboardRouter = require("./routers/dashboardRouter");
+const connection = require("./config/db");
 require("dotenv").config();
 
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
+app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-app.get("/", (req, res) => {
-  res.render("dashboard");
-});
 
+app.use("/", dashboardRouter);
 app.listen(process.env.PORT, (error) => {
   if (error) {
     console.log("server is not running");
     return;
   }
+  connection();
   console.log(`server is running ${process.env.PORT}`);
 });
