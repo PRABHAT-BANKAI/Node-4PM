@@ -25,4 +25,9 @@ dashboardRouter.post("/createData", async (req, res) => {
   }
 });
 
+
+dashboardRouter.get("/addProducts", async (req, res) => {
+  res.render("addProducts");
+})
+
 module.exports = dashboardRouter;
