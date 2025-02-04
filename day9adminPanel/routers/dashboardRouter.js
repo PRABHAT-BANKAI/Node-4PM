@@ -25,9 +25,37 @@ dashboardRouter.post("/createData", async (req, res) => {
   }
 });
 
+dashboardRouter.get("/userTable", async (req, res) => {
+  try {
+    const getUsers = await UserModel.find({});
+    console.log(getUsers);
+    res.render("userTable", { getUsers });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 dashboardRouter.get("/addProducts", async (req, res) => {
   res.render("addProducts");
-})
+});
+
+dashboardRouter.post("/login", async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const getLoginData = await UserModel.findOne({
+      userName: req.body.userName,
+    });
+    console.log(getLoginData);
+    if (getLoginData.password === req.body.password) {
+      res.redirect("/dashboard");
+    }else{
+      res.redirect("/");
+    }
+  } catch (err) {
+    console.log(err);
+    res.redirect("/");
+  }
+});
 
 module.exports = dashboardRouter;
