@@ -3,14 +3,29 @@ const UserModel = require("../models/UserModel");
 const dashboardRouter = express.Router();
 
 dashboardRouter.get("/dashboard", (req, res) => {
-  res.render("dashboard");
+  let getData = req.cookies.userData;
+  if (getData) {
+    res.render("dashboard");
+  } else {
+    res.redirect("/");
+  }
 });
 
 dashboardRouter.get("/", (req, res) => {
-  res.render("login");
+  let getData = req.cookies.userData;
+  if (!getData) {
+    res.render("login");
+  } else {
+    res.redirect("/dashboard");
+  }
 });
 dashboardRouter.get("/signup", (req, res) => {
-  res.render("signup");
+  let getData = req.cookies.userData;
+  if (!getData) {
+    res.render("signup");
+  } else {
+    res.redirect("/dashboard");
+  }
 });
 
 dashboardRouter.post("/createData", async (req, res) => {
@@ -35,6 +50,11 @@ dashboardRouter.get("/userTable", async (req, res) => {
   }
 });
 
+dashboardRouter.get("/logout", (req, res) => {
+  res.clearCookie("userData");
+  res.redirect("/");
+});
+
 dashboardRouter.get("/addProducts", async (req, res) => {
   res.render("addProducts");
 });
@@ -48,8 +68,9 @@ dashboardRouter.post("/login", async (req, res) => {
     });
     console.log(getLoginData);
     if (getLoginData.password === req.body.password) {
+      res.cookie("userData", getLoginData);
       res.redirect("/dashboard");
-    }else{
+    } else {
       res.redirect("/");
     }
   } catch (err) {
