@@ -3,11 +3,14 @@ const UserModel = require("../models/UserModel");
 const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(
-  new LocalStrategy({
-    usernameField: "userName",
-    async function(userName, password, done) {
+  new LocalStrategy(
+    {
+      usernameField: "userName",
+    },
+    async function (userName, password, done) {
+      console.log(userName, password, "passport");
       try {
-        let getData = await UserModel.findOne(userName);
+        let getData = await UserModel.findOne({userName});
 
         if (getData.password == password) {
           return done(null, getData);
@@ -18,8 +21,8 @@ passport.use(
         console.log(e);
         return done(null, false);
       }
-    },
-  })
+    }
+  )
 );
 passport.serializeUser(function (user, done) {
   done(null, user.id);

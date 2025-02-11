@@ -4,12 +4,29 @@ const path = require("path");
 const dashboardRouter = require("./routers/dashboardRouter");
 const connection = require("./config/db");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const passport = require("passport");
+
 require("dotenv").config();
 
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(cookieParser());
+app.use(
+  session({
+    secret: "vinit",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60, // 1 hour
+    },
+  })
+);
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 
 app.use("/", dashboardRouter);
 app.listen(process.env.PORT, (error) => {
