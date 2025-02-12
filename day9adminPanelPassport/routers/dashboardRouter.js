@@ -3,13 +3,8 @@ const UserModel = require("../models/UserModel");
 const dashboardRouter = express.Router();
 const passport = require("../middleware/passportLocal");
 
-dashboardRouter.get("/dashboard", (req, res) => {
-  // let getData = req.cookies.userData;
-  // if (getData) {
+dashboardRouter.get("/dashboard", passport.auth, (req, res) => {
   res.render("dashboard");
-  // } else {
-  //   res.redirect("/");
-  // }
 });
 
 dashboardRouter.get("/", (req, res) => {
@@ -41,7 +36,7 @@ dashboardRouter.post("/createData", async (req, res) => {
   }
 });
 
-dashboardRouter.get("/userTable", async (req, res) => {
+dashboardRouter.get("/userTable", passport.auth, async (req, res) => {
   try {
     const getUsers = await UserModel.find({});
     console.log(getUsers);
@@ -53,10 +48,11 @@ dashboardRouter.get("/userTable", async (req, res) => {
 
 dashboardRouter.get("/logout", (req, res) => {
   // res.clearCookie("userData");
+  req.session.destroy();
   res.redirect("/");
 });
 
-dashboardRouter.get("/addProducts", async (req, res) => {
+dashboardRouter.get("/addProducts", passport.auth, async (req, res) => {
   res.render("addProducts");
 });
 

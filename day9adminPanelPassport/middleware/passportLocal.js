@@ -37,4 +37,13 @@ passport.deserializeUser(async function (id, done) {
   }
 });
 
+passport.auth = (req,res,next)=>{
+  if(req.isAuthenticated()){
+    next();
+  }else{
+    res.redirect("/");
+  }
+
+}
+
 module.exports = passport;
