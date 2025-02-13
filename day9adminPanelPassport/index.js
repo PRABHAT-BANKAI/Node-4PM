@@ -27,6 +27,7 @@ app.use(
 app.use(passport.initialize());
 
 app.use(passport.session());
+app.use(passport.setUser);
 
 app.use("/", dashboardRouter);
 app.listen(process.env.PORT, (error) => {

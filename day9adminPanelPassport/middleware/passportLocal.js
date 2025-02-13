@@ -10,7 +10,7 @@ passport.use(
     async function (userName, password, done) {
       console.log(userName, password, "passport");
       try {
-        let getData = await UserModel.findOne({userName});
+        let getData = await UserModel.findOne({ userName });
 
         if (getData.password == password) {
           return done(null, getData);
@@ -37,13 +37,17 @@ passport.deserializeUser(async function (id, done) {
   }
 });
 
-passport.auth = (req,res,next)=>{
-  if(req.isAuthenticated()){
+passport.auth = (req, res, next) => {
+  if (req.isAuthenticated()) {
     next();
-  }else{
+  } else {
     res.redirect("/");
   }
+};
 
-}
+passport.setUser = (req, res, next) => {
+  res.locals.user = req.user;
+  next();
+};
 
 module.exports = passport;
