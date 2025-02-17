@@ -25,6 +25,20 @@
           </td>
         </tr>
         <tr>
+          <td>
+            <input type="radio" name="gender" value="male"   <%= userData.gender==="male"?"checked":"" %> />Male
+            <input type="radio" name="gender" value="female" <%= userData.gender==="female"?"checked":"" %>  />Female
+          </td>
+        </tr>
+        <tr>
+          <td>Hobbies</td>
+          <td>
+            <input name="hobbies" type="checkbox" value="coding" <%= userData.hobbies.includes("coding")?"checked":"" %>/>coding
+            <input name="hobbies" type="checkbox" value="cycling" <%= userData.hobbies.includes("cycling")?"checked":"" %> />cycling
+            <input name="hobbies" type="checkbox" value="reading" <%= userData.hobbies.includes("reading")?"checked":"" %> />reading
+          </td>
+        </tr>
+        <tr>
           <td>File upload:</td>
           <td><input type="file" name="image" /> <img src="<%= userData.image %>" height="100px" alt=""></td>
 

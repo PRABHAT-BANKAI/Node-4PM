@@ -11,6 +11,14 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+  },
+  hobbies: {
+    type: Array,
+    required: true,
+  },
   image: {
     type: String,
     required: true,

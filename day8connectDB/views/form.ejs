@@ -17,6 +17,21 @@
           <td><input type="email" name="email" /></td>
         </tr>
         <tr>
+          <td>Gender:</td>
+          <td>
+            <input type="radio" name="gender" value="male" />Male
+            <input type="radio" name="gender" value="female" />Female
+          </td>
+        </tr>
+        <tr>
+          <td>Hobbies</td>
+          <td>
+            <input name="hobbies" type="checkbox" value="coding"  />coding
+            <input name="hobbies" type="checkbox" value="cycling"  />cycling
+            <input name="hobbies" type="checkbox" value="reading" />reading
+          </td>
+        </tr>
+        <tr>
           <td>File upload:</td>
           <td><input type="file" name="image" /></td>
         </tr>
@@ -35,6 +50,8 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>Gender</th>
+          <th>hobbies</th>
           <th>image</th>
           <th>Action</th>
         </tr>
@@ -44,6 +61,8 @@
         <tr>
           <td><%= user.userName %></td>
           <td><%= user.email %></td>
+          <td><%= user.gender %></td>
+          <td><%= user.hobbies %></td>
           <td><img src="<%= user.image %>" height="150px" alt="" /></td>
           <td>
             <a href="/deleteData/<%= user.id %>"><button>Delete</button></a>
