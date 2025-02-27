@@ -6,12 +6,15 @@ const connection = require("./config/db");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
-
+const flash = require("connect-flash");
+const connectFlash = require("./middleware/connectFlash");
 require("dotenv").config();
 
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(flash());
+
 app.use(cookieParser());
 app.use(
   session({
@@ -29,6 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setUser);
+app.use(connectFlash.setFlash);
 
 app.use("/", dashboardRouter);
 app.listen(process.env.PORT, (error) => {

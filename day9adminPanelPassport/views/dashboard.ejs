@@ -1184,7 +1184,7 @@
                       href="#messages"
                       role="tab"
                       ><span class="hidden-sm-up"></span>
-                      <span class="hidden-xs-down">Tab3</span></a
+                      <span class="hidden-xs-down"><%= locals.flash.success %> </span></a
                     >
                   </li>
                 </ul>
@@ -1248,3 +1248,22 @@
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <%- include("Footer") %>
+
+
+
+        <script>
+          <% if(locals.flash.success){ %>
+            Swal.fire({
+            title: "<%= locals.flash.success %>",
+            text: "You clicked the button!",
+            icon: "success"
+          });
+          
+          <% } %>
+          
+          
+          
+          
+                   </script>
+              
+
