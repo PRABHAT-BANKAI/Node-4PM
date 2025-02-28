@@ -4,6 +4,7 @@ const dashboardRouter = express.Router();
 const passport = require("../middleware/passportLocal");
 const nodemailer = require("nodemailer");
 const ProductModel = require("../models/ProductModels");
+const SubProductModel = require("../models/SubProduct");
 
 dashboardRouter.get("/dashboard", passport.auth, (req, res) => {
   res.render("dashboard");
@@ -130,5 +131,19 @@ dashboardRouter.get("/addSubProducts", async (req, res) => {
     res.redirect("back");
   }
 });
+
+dashboardRouter.post("/createSubProduct", async (req, res) => {
+  // console.log(req.body);
+
+  try{
+    await SubProductModel.create(req.body)
+   
+    console.log("sub product created")
+    res.redirect("/dashboard");
+  }catch (err) {
+    console.log(err);
+    res.redirect("back");
+  }
+})
 
 module.exports = dashboardRouter;

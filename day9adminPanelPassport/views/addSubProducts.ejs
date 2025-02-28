@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="card">
-                <form class="form-horizontal" method="post" action="/addSubProduct">
+                <form class="form-horizontal" method="post" action="/createSubProduct">
                   <div class="card-body">
                     <h4 class="card-title">Personal Info</h4>
                     <div class="form-group row">
@@ -54,13 +54,13 @@
                           class="form-control"
                           id="fname"
                           placeholder="First Name Here"
-                          name="subProductName"
+                          name="subProduct"
                         />
 
-                        <select name="" id="">
+                        <select name="productId" id="">
                           <%    getProducts.map((item)=>{        %>
                             
-                            <option value="<%= item.id%> "> <%=item.productName %> </option>
+                            <option value="<%= item.id %> "> <%=item.productName %> </option>
               <%            })        %>
                         </select>
                       </div>
