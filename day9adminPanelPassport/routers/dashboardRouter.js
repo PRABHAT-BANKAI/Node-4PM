@@ -133,7 +133,7 @@ dashboardRouter.get("/addSubProducts", async (req, res) => {
 });
 
 dashboardRouter.post("/createSubProduct", async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
 
   try{
     await SubProductModel.create(req.body)

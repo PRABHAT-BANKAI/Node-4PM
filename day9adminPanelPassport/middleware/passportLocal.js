@@ -11,6 +11,7 @@ passport.use(
       console.log(userName, password, "passport");
       try {
         let getData = await UserModel.findOne({ userName });
+        console.log(getData);
 
         if (getData.password == password) {
           return done(null, getData);
