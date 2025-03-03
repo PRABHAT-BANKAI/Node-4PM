@@ -132,6 +132,18 @@ dashboardRouter.get("/addSubProducts", async (req, res) => {
   }
 });
 
+
+dashboardRouter.get("/subProductTable", passport.auth, async (req, res) => {
+  try {
+    const getSubProducts = await SubProductModel.find().populate("productId").exec();
+    console.log(getSubProducts);
+    res.render("subProductTable", { getSubProducts });
+  } catch (error) {
+    console.log(error);
+    res.redirect("back");
+  }
+})
+
 dashboardRouter.post("/createSubProduct", async (req, res) => {
   console.log(req.body);
 
