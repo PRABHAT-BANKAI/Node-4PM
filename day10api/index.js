@@ -1,6 +1,7 @@
 const express = require("express");
 const connected = require("./config/db");
 const UserRouter = require("./routes/userRouter");
+const auth = require("./middileware/auth");
 
 const app = express();
 require("dotenv").config();
@@ -12,6 +13,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", UserRouter);
+app.use(auth)
+app.get("/products", (req, res) => {
+  res.status(200).json({ message: "productpage" });
+});
 // app.use("products")
 
 // app.get("/", (req, res) => {
