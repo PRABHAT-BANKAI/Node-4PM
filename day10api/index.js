@@ -13,7 +13,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", UserRouter);
-app.use(auth)
+app.use(auth);
+
 app.get("/products", (req, res) => {
   res.status(200).json({ message: "productpage" });
 });
